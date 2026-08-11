@@ -9,6 +9,11 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
+    // Disable Lenis on the builder route to allow normal nested scrolling
+    if (typeof window !== "undefined" && window.location.pathname.includes("/builder")) {
+      return;
+    }
+
     // Register GSAP plugins
     gsap.registerPlugin(ScrollTrigger);
 
